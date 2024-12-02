@@ -21,6 +21,6 @@ class Event extends Model
     }
 
     public function attendees(array $options = []): HasMany {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Attendee::class);
     }
 }

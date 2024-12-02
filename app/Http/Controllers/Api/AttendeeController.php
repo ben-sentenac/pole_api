@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AttendeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Event $event)
     {
-        //
+        $attendees = $event->attendees()->paginate(10);
+
+        return $attendees;
     }
 
     /**
