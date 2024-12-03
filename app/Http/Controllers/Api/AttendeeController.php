@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Traits\LoadRelationShips;
 use App\Models\Event;
 use App\Models\Attendee;
 use Illuminate\Http\Request;
@@ -10,12 +11,16 @@ use App\Http\Resources\AttendeeResource;
 
 class AttendeeController extends Controller
 {
+
+    use LoadRelationShips;
+
+    private $relations = ['user'];
     /**
      * Display a listing of the resource.
      */
     public function index(Event $event)
     {
-        $attendees = $event->attendees()->latest();
+        $attendees = $this->loadOptionalRelations($event->attendees()->latest());
 
         return AttendeeResource::collection( $attendees->paginate());
     }

@@ -3,19 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\EventResource;
+use App\Http\Traits\LoadRelationShips;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class EventController extends Controller
 {
+
+    use LoadRelationShips;
+
+    private $relations = ['user','attendees','attendees.user'];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return EventResource::collection(Event::with('user')->paginate());
+
+        $query = $this->loadOptionalRelations(Event::query(),$this->relations);
+
+
+        //return EventResource::controller(Event::with('user)->latest())
+        return EventResource::collection($query->latest()->paginate());
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -40,7 +52,7 @@ class EventController extends Controller
      */
     public function show(Request $request, Event $event)
     {
-        return new EventResource($event->load('user','attendees'));
+        return new EventResource($this->loadOptionalRelations($event));
     }
 
     /**
