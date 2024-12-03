@@ -14,6 +14,7 @@ class EventController extends Controller
     use LoadRelationShips;
 
     private $relations = ['user','attendees','attendees.user'];
+
     /**
      * Display a listing of the resource.
      */
