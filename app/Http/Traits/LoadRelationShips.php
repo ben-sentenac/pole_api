@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Traits;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -13,9 +14,9 @@ trait LoadRelationShips
 {
 
     public function loadOptionalRelations(
-        Model|QueryBuilder|EloquentBuilder|HasMany|BelongsToMany $model,
+        Model|QueryBuilder|EloquentBuilder|HasMany|BelongsToMany|BelongsTo $model,
         ?array $relations = null
-        ): Model|QueryBuilder|EloquentBuilder|HasMany|BelongsToMany {
+        ): Model|QueryBuilder|EloquentBuilder|HasMany|BelongsToMany|BelongsTo {
             $relations = $relations ?? $this->relations ?? [];
             foreach ($relations as $relation) {
                $model->when(
