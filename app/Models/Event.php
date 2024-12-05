@@ -13,7 +13,7 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name","user_id","description","start_time","end_time"
+        "name","user_id","location_id","description","start_time","end_time"
     ];
 
     public function user(): BelongsTo {
@@ -22,5 +22,9 @@ class Event extends Model
 
     public function attendees(array $options = []): HasMany {
         return $this->hasMany(Attendee::class);
+    }
+
+    public function location(): BelongsTo {
+        return $this->belongsTo(Location::class);
     }
 }

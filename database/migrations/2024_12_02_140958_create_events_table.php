@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Location;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
+            $table->foreignIdFor(Location::class);
             $table->timestamps();
         });
     }
