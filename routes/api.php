@@ -28,11 +28,14 @@ Route::apiResource('events', EventController::class)
 Route::apiResource('events.attendees', AttendeeController::class)
     ->only(['index', 'show'])
     ->scoped();
-Route::apiResource('locations',LocationController::class)
-->only(['index','show'])
-->scoped();
 // Protected routes
 Route::apiResource('events.attendees', AttendeeController::class)
     ->except(['index', 'show', 'update'])
     ->scoped()
     ->middleware('auth:sanctum');
+
+Route::apiResource('locations',LocationController::class)
+    ->only(['index','show']);
+    Route::apiResource('locations', AttendeeController::class)
+    ->except(['index', 'show']);
+    //->middleware('auth:sanctum');

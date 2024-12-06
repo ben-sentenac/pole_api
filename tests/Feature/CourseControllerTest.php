@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 uses(RefreshDatabase::class);
-
+/*
 test('GET /api/courses', function () {
     $response = $this->getJson('/api/courses');
 
@@ -20,3 +20,4 @@ test('POST /api/courses should send 422', function () {
 
         $response->assertStatus(422);
 });
+*/

@@ -19,4 +19,19 @@ class LocationController extends Controller
         $events = $this->loadOptionalRelations(Location::query(), $this->relations);
        return LocationResource::collection($events->latest()->paginate());
     }
+
+    public function show (Request $request,Location $location) {
+        return new LocationResource($this->loadOptionalRelations($location));
+    }
+
+    public function store(Request $request) {
+        $location = Location::create([
+            ...$request->validate([
+                "name" => 'required|string',
+                "address" => 'required|string',
+                'coordinates' => 'nullable|json'
+            ])
+        ]);
+        return new LocationResource($location);
+    }
 }

@@ -13,6 +13,14 @@ class LocationSeeder extends Seeder
      */
     public function run(): void
     {
-        Location::factory(50)->create();
+        Location::create([
+            "name" => "no location",
+            "address" => "N/A",
+            "coordinates" => json_encode([
+                "lat" => .0000,
+                "lon" => .0000,
+            ])
+            ]);
+        Location::factory(49)->create();
     }
 }
